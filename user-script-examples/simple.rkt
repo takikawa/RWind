@@ -10,6 +10,8 @@
          rwind/workspace
          racket/function)
 
+(set-num-workspaces! 3)
+
 ;;; Some key/mouse bindings
 
 (add-bindings 
@@ -34,7 +36,7 @@
  "M-Super-F6" (L* (change-workspace-mode 'multi))
  )
 
-(for ([i 3])
+(for ([i (get-num-workspaces)])
   (add-bindings
    global-keymap
    ; Switch to the i-th workspace with Super-F1, Super-F2, etc.
