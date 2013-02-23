@@ -491,6 +491,11 @@ See also `split-head'."
 ;=== Init ===;
 ;============;
 
+(define num-workspaces 3)
+
+(define* (set-num-workspaces! n) (set! num-workspaces n))
+(define* (get-num-workspaces) num-workspaces)
+
 (define* (init-workspaces)
   ; Wait for sync to be sure that all pending windows (not currently managed by us) are mapped:
   (XSync (current-display) #f)
@@ -505,7 +510,7 @@ See also `split-head'."
     '("DarkSlateGray" "DarkSlateBlue" "Sienna"))
   
   ;; Create at least one workspace per head
-  (for ([i (max (head-count) 3)]
+  (for ([i (max (head-count) (get-num-workspaces))]
         [color (in-cycle color-list)])
     ; Create a workspace and apply the keymap to it
     (make-workspace (number->string i)  #:background-color (find-named-color color)))
